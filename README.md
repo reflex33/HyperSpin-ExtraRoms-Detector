@@ -5,3 +5,4 @@ This is useful when scanning roms with Rocket Launcher.  Rocket Launcher will sh
 ## TODO
 * Change results text box to resize with window
 * Text box is not scrollable
+* Make XML file and scan folder text box not text wrap

@@ -92,7 +92,7 @@ namespace HyperSpin_ExtraRoms_Detector
                     result_box.AppendText(game + Environment.NewLine);
             }
             else
-                result_box.AppendText("You have no games in the folder that are not in the XML");
+                result_box.Text = "You have no games in the folder that are not in the XML";
         }
     }
 }

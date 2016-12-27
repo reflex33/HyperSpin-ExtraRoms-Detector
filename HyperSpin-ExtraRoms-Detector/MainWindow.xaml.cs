@@ -87,9 +87,27 @@ namespace HyperSpin_ExtraRoms_Detector
             // Print result
             if (game_names_folder.Count > 0)
             {
-                result_box.Text = "The games you have in the folder, but not in the XML:" + Environment.NewLine;
+                // Create backup directory
+                Directory.CreateDirectory(scan_folder_file_box.Text + "\\ExtraRoms");
+
+                result_box.Text = "The following games were extra and moved to \"ExtraRoms\":" + Environment.NewLine;
                 foreach (string game in game_names_folder)
+                {
+                    // Add message to the text box
                     result_box.AppendText(game + Environment.NewLine);
+
+                    // Find full file name (with extension)
+                    String[] path1 = Directory.GetFiles(scan_folder_file_box.Text, game + "*");
+                    if (path1.Length > 1 || path1.Length == 0)
+                        result_box.Text = "Found " + game + " twice!  Stopping search!";
+
+                    // Setup move path
+                    int last_dot_index = path1[0].LastIndexOf('.');
+                    String path2 = scan_folder_file_box.Text + "\\ExtraRoms\\" + game + path1[0].Substring(last_dot_index);
+
+                    // Move file
+                    Directory.Move(path1[0], path2);
+                }
             }
             else
                 result_box.Text = "You have no games in the folder that are not in the XML";
